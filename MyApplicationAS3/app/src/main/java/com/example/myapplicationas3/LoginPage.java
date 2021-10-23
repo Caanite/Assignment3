@@ -2,36 +2,48 @@ package com.example.myapplicationas3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginPage extends AppCompatActivity {
 
-    EditText userName, Password, ReEnterPassword;
-    Button Register, SignIn;
+    EditText username, password;
+    Button Signin;
+    DataBaseCode db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_signingin_layout);
 
-        userName = (EditText) findViewById(R.id.userName);
-        Password = (EditText) findViewById(R.id.Password);
-        ReEnterPassword = (EditText) findViewById(R.id.ReEnterPassword);
-        Register = (Button) findViewById(R.id.Register);
-        SignIn = (Button) findViewById(R.id.SignIn);
-
-        Register.setOnClickListener(new View.OnClickListener() {
+        username = (EditText) findViewById(R.id.SignIn_userName);
+        password = (EditText) findViewById(R.id.SignIn_Password);
+        Signin = (Button) findViewById(R.id.SignIn_SignIn_button);
+        db = new DataBaseCode(this);
+        Signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String user = username.getText().toString();
+                String pass = password.getText().toString();
 
-            }
-        });
+                if (user.equals("") || pass.equals("")){
+                    Toast.makeText(LoginPage.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
 
-        SignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }else{
+                    Boolean checkuserPass = db.checkUserNamePassword(user,pass);
+                    if (checkuserPass){
+                        Toast.makeText(LoginPage.this, "Sign in successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(LoginPage.this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
             }
         });
