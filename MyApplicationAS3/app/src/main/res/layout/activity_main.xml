@@ -41,4 +41,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.41000003" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="6dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
