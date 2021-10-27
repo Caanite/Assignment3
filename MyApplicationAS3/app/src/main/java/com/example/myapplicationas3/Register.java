@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class Register extends AppCompatActivity {
 
     EditText userName, Password, ReEnterPassword;
-    Button Register, SignIn;
+    Button Register, Sign_in;
     DataBaseCode db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class Register extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.Password);
         ReEnterPassword = (EditText) findViewById(R.id.ReEnterPassword);
         Register = (Button) findViewById(R.id.Register);
-        SignIn = (Button) findViewById(R.id.SignIn);
+        Sign_in = (Button) findViewById(R.id.SignIn);
         db = new DataBaseCode(this);
 
         Register.setOnClickListener(new View.OnClickListener() {
@@ -61,13 +61,16 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        SignIn.setOnClickListener(new View.OnClickListener() {
+        Sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginPage.class);
-                startActivity(intent);
+                OpenActivity();
 
             }
         });
+    }
+    public void OpenActivity(){
+        Intent intent = new Intent(this,LoginPage.class);
+        startActivity(intent);
     }
 }
