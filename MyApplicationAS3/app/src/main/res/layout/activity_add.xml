@@ -48,6 +48,7 @@
                     android:id="@+id/repeatButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:text="@string/repeat" />
 
                 <TextView
