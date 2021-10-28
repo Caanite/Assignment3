@@ -44,7 +44,7 @@ public class EventAddActivity extends AppCompatActivity {
                     }
                 });
 
-                builder.create();
+                AlertDialog dialog = builder.create();
             }
         });
     }
