@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Time_array">
+        <Item>Never</Item>
+        <Item>Every Day</Item>
+        <Item>Every Two Days</Item>
+        <Item>Every Week</Item>
+        <Item>Every Fortnight</Item>
+        <Item>Every Month</Item>
+        <Item>Every Year</Item>
+    </string-array>
+</resources>
