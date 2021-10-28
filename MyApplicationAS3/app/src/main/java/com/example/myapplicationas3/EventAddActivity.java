@@ -27,25 +27,31 @@ public class EventAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        Resources res = getResources();
-
         repeatButton = findViewById(R.id.repeatButton);
         repeatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(repeatButton.getContext());
-
-                arrayTimeTexts = res.getStringArray(R.array.Time_array);
-
-                builder.setMessage(R.string.repeatText).setItems(R.array.Time_array, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        repeatOptionText.setText(arrayTimeTexts[which]);
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
+                alertDialog();
             }
         });
+    }
+
+    private void alertDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        Resources res = getResources();
+
+        arrayTimeTexts = res.getStringArray(R.array.Time_array);
+
+        builder.setTitle(R.string.repeat).setMessage(R.string.repeatText).setItems(R.array.Time_array, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                repeatOptionText.setText(arrayTimeTexts[which]);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
