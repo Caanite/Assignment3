@@ -41,4 +41,9 @@ public class EventAddActivity extends AppCompatActivity {
         op.show(getSupportFragmentManager(), "Example");
     }
 
+    public void setRepeatText(String repeatText)
+    {
+        repeatOptionText = findViewById(R.id.repeatOptionText);
+        repeatOptionText.setText(repeatText);
+    }
 }

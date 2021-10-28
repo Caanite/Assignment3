@@ -11,21 +11,21 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class OpenDialog extends AppCompatDialogFragment {
     private String[] arrayTimeTexts;
-    private TextView repeatOptionText;
 
 
 
     public Dialog onCreateDialog(Bundle SavedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        EventAddActivity activity = (EventAddActivity)getActivity();
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         Resources res = getResources();
 
         arrayTimeTexts = res.getStringArray(R.array.Time_array);
 
-        builder.setTitle(R.string.repeat).setMessage(R.string.repeatText).setItems(R.array.Time_array, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.repeat).setItems(arrayTimeTexts, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                repeatOptionText.setText(arrayTimeTexts[which]);
+                activity.setRepeatText(arrayTimeTexts[which]);
             }
         });
 
