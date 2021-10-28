@@ -28,6 +28,11 @@
             android:screenOrientation="sensor">
 
         </activity>
+        <activity
+            android:name=".EventAddActivity"
+            android:screenOrientation="sensor">
+
+        </activity>
     </application>
 
 </manifest>
