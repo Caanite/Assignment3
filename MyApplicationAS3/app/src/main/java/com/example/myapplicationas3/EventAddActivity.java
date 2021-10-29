@@ -48,6 +48,8 @@ public class EventAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         EditText ed = (EditText) findViewById(R.id.editTextDate2);
+        Button addButton = findViewById(R.id.addEvent);
+        EditText eventText = findViewById(R.id.eventName);
 
         repeatButton = (Button) findViewById(R.id.repeatButton);
         repeatButton.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +90,22 @@ public class EventAddActivity extends AppCompatActivity {
             }
         });
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(eventText.getText() != null && ed.getText() != null)
+                {
+                    //Send data to SQLite database
+
+                }
+                else
+                {
+                    //Toast telling user to enter data
+                    Toast toast = Toast.makeText(EventAddActivity.this, R.string.toastText, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
     }
 
     public void OpenDialog_() {
