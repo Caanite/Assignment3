@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:ems="10"
+                android:focusable="false"
                 android:hint="@string/event_date"
                 android:importantForAutofill="no"
                 android:inputType="date"
