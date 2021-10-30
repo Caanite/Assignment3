@@ -14,6 +14,7 @@ public class LoginPage extends AppCompatActivity {
 
     EditText username, password;
     Button Signin;
+    Button Register;
     DataBaseCode db;
 
     @Override
@@ -24,6 +25,7 @@ public class LoginPage extends AppCompatActivity {
         username = (EditText) findViewById(R.id.SignIn_userName);
         password = (EditText) findViewById(R.id.SignIn_Password);
         Signin = (Button) findViewById(R.id.SignIn_SignIn_button);
+        Register = (Button) findViewById(R.id.LoginPageRegister);
         db = new DataBaseCode(this);
         Signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,5 +49,13 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
+        Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Register.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
