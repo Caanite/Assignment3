@@ -13,36 +13,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/SignIn_userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:hint="Username:"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/SignIn_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:hint="Password:"
+                android:minHeight="48dp"
+                tools:ignore="NotSibling" />
+
+            <Button
+                android:id="@+id/SignIn_SignIn_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="50dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:text="Sign In" />
+
+            <Button
+                android:id="@+id/LoginPageRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="160dp"
+                android:layout_marginTop="50dp"
+                android:text="Register?" />
+        </LinearLayout>
     </ScrollView>
-
-    <EditText
-        android:id="@+id/SignIn_userName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:hint="Username:"
-        android:minHeight="48dp" />
-
-    <EditText
-        android:id="@+id/SignIn_Password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/SignIn_userName"
-        android:layout_marginTop="46dp"
-        android:hint="Password:"
-        android:minHeight="48dp"
-        tools:ignore="NotSibling" />
-
-    <Button
-        android:id="@+id/SignIn_SignIn_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/SignIn_Password"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="50dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Sign In" />
 
 </RelativeLayout>
