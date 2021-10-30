@@ -24,8 +24,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.text.ParseException;
 import java.time.Year;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.text.SimpleDateFormat;
 
@@ -59,16 +61,25 @@ public class EventAddActivity extends AppCompatActivity {
 
         DatePickerDialog.OnDateSetListener dt = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)  {
                 Cal.set(Calendar.YEAR, year);
                 Cal.set(Calendar.MONTH, month);
                 Cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                if (year > yr ) {
-                    InputLabel();
-                } else if (month >= mon && year == yr) {
-                    InputLabel();
+
+                Date current = new Date();
+                String num = Integer.toString(dayOfMonth) +"/" + Integer.toString(month+1) +"/" +Integer.toString(year);
+                Date ED = null;
+                try{
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    ED = sdf.parse(num);
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                else if (){
+                if (ED.after(current) || ED.equals(current)) {
+                    InputLabel();
+                }else if (year == yr && month ==mon && day == dayOfMonth ) { //Top condition takes into account hours and minutes
+                    InputLabel();
+                }else{
                     Toast WrongDateToast = Toast.makeText(getApplicationContext(), "Please make events for the future, not the past", Toast.LENGTH_SHORT);
                     WrongDateToast.show();
                 }
