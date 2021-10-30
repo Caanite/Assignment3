@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         EntryAdder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EventAddActivity.class); //WHEREEVER MAIN PAGE IS MEANT TO BE
+                Intent intent = new Intent(getApplicationContext(), EventAddActivity.class);
                 startActivity(intent);
 
             }

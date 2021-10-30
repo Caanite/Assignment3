@@ -38,6 +38,7 @@ public class EventAddActivity extends AppCompatActivity {
     private Button repeatButton;
     private TextView repeatOptionText;
     private Button addEvent;
+    private Button UpdateButton;
     private Calendar Cal = Calendar.getInstance();
     private int yr = Cal.get(Calendar.YEAR), mon = Cal.get(Calendar.MONTH), day = Cal.get(Calendar.DAY_OF_MONTH);
     private boolean granted = false;
@@ -53,6 +54,7 @@ public class EventAddActivity extends AppCompatActivity {
         EditText ed = (EditText) findViewById(R.id.editTextDate2);
         eventName = (EditText) findViewById(R.id.eventName);
         addEvent = (Button) findViewById(R.id.addEvent);
+        UpdateButton = (Button) findViewById(R.id.UpdateButton);
 
         repeatButton = (Button) findViewById(R.id.repeatButton);
         repeatButton.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +119,22 @@ public class EventAddActivity extends AppCompatActivity {
 
             }
         });
+        UpdateData();
+
     }
 
+
+    public void UpdateData() {
+        UpdateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //EventAddActivity e = new EventAddActivity();
+                //boolean updateTable = db.updateTable(eventName.toString(), num, repeatOptionText.toString());
+                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
     public void OpenDialog_() {
         OpenDialog op = new OpenDialog();
         op.show(getSupportFragmentManager(), "Example");

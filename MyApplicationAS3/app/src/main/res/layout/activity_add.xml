@@ -68,6 +68,12 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/add_event" />
+
+            <Button
+                android:id="@+id/UpdateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update" />
         </LinearLayout>
     </ScrollView>
 
