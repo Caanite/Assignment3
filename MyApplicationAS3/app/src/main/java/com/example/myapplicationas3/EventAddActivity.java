@@ -112,6 +112,8 @@ public class EventAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String EventName = eventName.getText().toString();
                 db.insertData(EventName, num, "Never");
+                Toast EventAddedToast = Toast.makeText(getApplicationContext(), "Event added successfully", Toast.LENGTH_SHORT);
+                EventAddedToast.show();
 
             }
         });
