@@ -63,9 +63,12 @@ public class EventAddActivity extends AppCompatActivity {
                 Cal.set(Calendar.YEAR, year);
                 Cal.set(Calendar.MONTH, month);
                 Cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                if (year >= yr && dayOfMonth >= day && month >= mon) {
+                if (year > yr ) {
                     InputLabel();
-                } else {
+                } else if (month >= mon && year == yr) {
+                    InputLabel();
+                }
+                else if (){
                     Toast WrongDateToast = Toast.makeText(getApplicationContext(), "Please make events for the future, not the past", Toast.LENGTH_SHORT);
                     WrongDateToast.show();
                 }
@@ -75,6 +78,7 @@ public class EventAddActivity extends AppCompatActivity {
             private void InputLabel() {
                 String myFormat = "dd/MM/yy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+
                 ed.setText(sdf.format(Cal.getTime()));
 
             }
@@ -110,9 +114,5 @@ public class EventAddActivity extends AppCompatActivity {
     }
 
 }
-
-        // Other 'case' lines to check for other
-        // permissions this app might request.
-
 
 
