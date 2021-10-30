@@ -13,15 +13,19 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity {
 
     private Button EntryAdder;
-    SQLiteDatabase db = openOrCreateDatabase("Database.db", MODE_PRIVATE, null);
+    //SQLiteDatabase db = SQLiteDatabase.openDatabase("Database.db", null, SQLiteDatabase.OPEN_READONLY);
+    EventDatabase db;
     EventAdapter eventAdapter;
     ListView events;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new EventDatabase(this);
+        SQLiteDatabase dbs = db.getWritableDatabase();
 
-        Cursor resultSet = db.rawQuery("Select * from events", null);
+
+        Cursor resultSet = dbs.rawQuery("Select * from events", null);
         events = findViewById(R.id.events);
         eventAdapter = new EventAdapter(this, resultSet);
         events.setAdapter(eventAdapter);

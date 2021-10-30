@@ -42,7 +42,7 @@ public class EventDatabase  extends SQLiteOpenHelper {
             return true;
         }
     }
-    /*public Boolean checkEvents(String event) {
+    public Boolean checkEvents(String event) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from events where eventName = ?", new String[]{event});
         if (cursor.getCount() > 0) {
@@ -51,7 +51,7 @@ public class EventDatabase  extends SQLiteOpenHelper {
             return false;
         }
     }
-    public Boolean checkUserNamePassword(String username, String Password) {
+   /* public Boolean checkUserNamePassword(String username, String Password) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, Password} );
         if (cursor.getCount()> 0) {
