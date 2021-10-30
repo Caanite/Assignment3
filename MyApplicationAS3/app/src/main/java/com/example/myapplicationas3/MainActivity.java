@@ -13,7 +13,7 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity {
 
     private Button EntryAdder;
-    SQLiteDatabase db = openOrCreateDatabase("database.db", MODE_PRIVATE, null);
+    SQLiteDatabase db = openOrCreateDatabase("Database.db", MODE_PRIVATE, null);
     EventAdapter eventAdapter;
     ListView events;
     @Override
