@@ -41,6 +41,7 @@ public class EventAddActivity extends AppCompatActivity {
     private Calendar Cal = Calendar.getInstance();
     private int yr = Cal.get(Calendar.YEAR), mon = Cal.get(Calendar.MONTH), day = Cal.get(Calendar.DAY_OF_MONTH);
     private boolean granted = false;
+    EventDatabase db = new EventDatabase(this);
 
     private String[] arrayTimeTexts;
 
@@ -84,6 +85,7 @@ public class EventAddActivity extends AppCompatActivity {
                     WrongDateToast.show();
                 }
 
+
             }
 
             private void InputLabel() {
@@ -102,6 +104,7 @@ public class EventAddActivity extends AppCompatActivity {
                 new DatePickerDialog(EventAddActivity.this, dt, Cal.get(Calendar.YEAR), Cal.get(Calendar.MONTH), Cal.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+        db.insertData()
 
     }
 
