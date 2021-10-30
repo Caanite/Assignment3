@@ -20,7 +20,7 @@ public class EventDatabase  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table events(eventName TEXT primary key, eventDate Date, repeat TEXT)");
+        db.execSQL("create Table events(eventName TEXT primary key, eventDate TEXT, repeat TEXT)");
     }
 
     @Override
@@ -29,11 +29,11 @@ public class EventDatabase  extends SQLiteOpenHelper {
 
     }
 
-    public Boolean insertData(String eventName, Date eventDate, String repeat) { //Inputting data from user into db
+    public Boolean insertData(String eventName, String eventDate, String repeat) { //Inputting data from user into db
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("eventName", eventName);
-        contentValues.put("eventDate", String.valueOf(eventDate)); //might need to see if this works
+        contentValues.put("eventDate", eventDate); //might need to see if this works
         contentValues.put("repeat", repeat);
         long result = db.insert("events", null, contentValues);
         if (result == -1) {

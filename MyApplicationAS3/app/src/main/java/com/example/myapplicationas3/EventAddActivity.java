@@ -44,13 +44,15 @@ public class EventAddActivity extends AppCompatActivity {
     EventDatabase db = new EventDatabase(this);
 
     private String[] arrayTimeTexts;
-
+    private String num = ""; //FOR THE DATE of EVENT
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         EditText ed = (EditText) findViewById(R.id.editTextDate2);
+        eventName = (EditText) findViewById(R.id.eventName);
+        addEvent = (Button) findViewById(R.id.addEvent);
 
         repeatButton = (Button) findViewById(R.id.repeatButton);
         repeatButton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +70,7 @@ public class EventAddActivity extends AppCompatActivity {
                 Cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 Date current = new Date();
-                String num = Integer.toString(dayOfMonth) +"/" + Integer.toString(month+1) +"/" +Integer.toString(year);
+                num = Integer.toString(dayOfMonth) +"/" + Integer.toString(month+1) +"/" +Integer.toString(year);
                 Date ED = null;
                 try{
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -104,8 +106,15 @@ public class EventAddActivity extends AppCompatActivity {
                 new DatePickerDialog(EventAddActivity.this, dt, Cal.get(Calendar.YEAR), Cal.get(Calendar.MONTH), Cal.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        db.insertData()
 
+        addEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String EventName = eventName.getText().toString();
+                db.insertData(EventName, num, "Never");
+
+            }
+        });
     }
 
     public void OpenDialog_() {
