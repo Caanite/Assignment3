@@ -9,4 +9,5 @@
     <string name="repeat">Repeat?</string>
     <string name="never">Never</string>
     <string name="add_event">Add Event</string>
+    <string name="repeatText">How often to repeat?</string>
 </resources>
