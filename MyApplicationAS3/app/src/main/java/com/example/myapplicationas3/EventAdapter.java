@@ -58,6 +58,7 @@ public class EventAdapter extends BaseAdapter {
         results.moveToPosition(i);
 
         ((TextView)view.findViewById(R.id.eventNameText)).setText(results.getString(0));
+        ((TextView)view.findViewById(R.id.eventDateText)).setText(results.getString(0));
 
         return view;
     }
