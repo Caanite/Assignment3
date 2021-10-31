@@ -65,7 +65,7 @@ public class EventAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         Intent extraIntent = getIntent();
 
-        String username = extraIntent.getStringExtra(USERNAME);
+        String username = extraIntent.getStringExtra(USERNAME); //receive username from main
         EditText ed = (EditText) findViewById(R.id.editTextDate2);
         eventName = (EditText) findViewById(R.id.eventName);
         addEvent = (Button) findViewById(R.id.addEvent);
@@ -145,7 +145,7 @@ public class EventAddActivity extends AppCompatActivity {
                 //EventAddActivity e = new EventAddActivity();
                 //boolean updateTable = db.updateTable(eventName.toString(), num, repeatOptionText.toString());
                 Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                intent.putExtra(MainActivity.USERNAME, username);
+                intent.putExtra(MainActivity.USERNAME, username); //send username to main
                 startActivity(intent);
             }
         });

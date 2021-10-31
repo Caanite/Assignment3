@@ -43,7 +43,7 @@ public class LoginPage extends AppCompatActivity {
                     if (checkuserPass){
                         Toast.makeText(LoginPage.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                        intent.putExtra(MainActivity.USERNAME, user);
+                        intent.putExtra(MainActivity.USERNAME, user); //send username to main
                         startActivity(intent);
                     }else{
                         Toast.makeText(LoginPage.this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();

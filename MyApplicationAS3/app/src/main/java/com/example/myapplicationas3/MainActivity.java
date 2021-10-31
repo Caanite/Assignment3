@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent extraIntent = getIntent();
 
-        String username = extraIntent.getStringExtra(USERNAME);
+        String username = extraIntent.getStringExtra(USERNAME); //receive username from login/registration
         SQLiteDatabase dbs = db.getWritableDatabase();
 
 
-        Cursor resultSet = dbs.rawQuery("Select * from events where username = ?", new String[]{username});
+        Cursor resultSet = dbs.rawQuery("Select * from events where username = ?", new String[]{username}); //select based on username
         events = findViewById(R.id.events);
         eventAdapter = new EventAdapter(this, resultSet); //creates adapter and sets it to the ListView
         events.setAdapter(eventAdapter);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EventAddActivity.class); //button swaps to the event adder screen
-                intent.putExtra(EventAddActivity.USERNAME, username);
+                intent.putExtra(EventAddActivity.USERNAME, username); //send username to add
                 startActivity(intent);
             }
         });
