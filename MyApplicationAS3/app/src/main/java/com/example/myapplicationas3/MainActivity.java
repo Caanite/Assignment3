@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EventAddActivity.class); //button swaps to the event adder screen
-                intent.putExtra(EventAddActivity.USERNAME, USERNAME);
+                intent.putExtra(EventAddActivity.USERNAME, username);
                 startActivity(intent);
             }
         });
