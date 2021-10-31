@@ -20,7 +20,7 @@ public class EventDatabase  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table events(eventName TEXT primary key, eventDate TEXT, repeat TEXT)");
+        db.execSQL("create Table events(id INTEGER PRIMARY KEY AUTOINCREMENT, eventName TEXT, eventDate TEXT, repeat TEXT)");
     }
 
     @Override
@@ -51,16 +51,20 @@ public class EventDatabase  extends SQLiteOpenHelper {
             return false;
         }
     }
-   /* public Boolean checkUserNamePassword(String username, String Password) {
+   public boolean deleteFromTable (String eventName){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, Password} );
-        if (cursor.getCount()> 0) {
-            return true;
+        Cursor cursor = db.rawQuery("Select * from events where eventName = ?", new String[]{eventName});
+        if (cursor.getCount()>0) {
+            long result = db.delete("events", "name=?", new String[]{eventName});
+            if (result == -1) {
+                return false;
+            }else{
+                return true;
+            }
         }else{
             return false;
         }
-
-    }*/
+   }
    public boolean updateTable(String eventName, String eventDate, String repeat){
        SQLiteDatabase db = this.getWritableDatabase();
        ContentValues contentValues = new ContentValues();
