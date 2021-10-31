@@ -169,7 +169,7 @@ public class EventAddActivity extends AppCompatActivity {
         }
 
     }
-
+  
     private void scheduleNotification (Notification notification, long timeDue, int id, int repeatId)
     {
         Intent notificationIntent = new Intent(this, DateNotificationBroadcast.class);//Intent to send it to DataNotificationBroadcast class
