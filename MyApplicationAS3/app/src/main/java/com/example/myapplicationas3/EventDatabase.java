@@ -22,7 +22,7 @@ public class EventDatabase  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table events(id INTEGER PRIMARY KEY AUTOINCREMENT, eventName TEXT, eventDate TEXT, repeat TEXT, username TEXT)");
+        db.execSQL("create Table events(eventName TEXT PRIMARY KEY, eventDate TEXT, repeat TEXT, username TEXT)");
     }
 
     @Override

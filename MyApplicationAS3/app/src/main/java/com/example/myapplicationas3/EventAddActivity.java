@@ -63,14 +63,13 @@ public class EventAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        Intent extraIntent = getIntent();
+
+        String username = extraIntent.getStringExtra(USERNAME);
         EditText ed = (EditText) findViewById(R.id.editTextDate2);
         eventName = (EditText) findViewById(R.id.eventName);
         addEvent = (Button) findViewById(R.id.addEvent);
         UpdateButton = (Button) findViewById(R.id.UpdateButton);
-
-        Intent extraIntent = getIntent();
-
-        String username = extraIntent.getStringExtra(USERNAME);
 
         repeatButton = (Button) findViewById(R.id.repeatButton);
         SQLiteDatabase dbs = db.getWritableDatabase();
