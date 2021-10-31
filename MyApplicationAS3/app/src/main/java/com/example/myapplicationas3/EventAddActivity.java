@@ -68,6 +68,10 @@ public class EventAddActivity extends AppCompatActivity {
         addEvent = (Button) findViewById(R.id.addEvent);
         UpdateButton = (Button) findViewById(R.id.UpdateButton);
 
+        Intent extraIntent = getIntent();
+
+        String username = extraIntent.getStringExtra(USERNAME);
+
         repeatButton = (Button) findViewById(R.id.repeatButton);
         SQLiteDatabase dbs = db.getWritableDatabase();
         repeatButton.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +130,7 @@ public class EventAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String EventName = eventName.getText().toString();
-                db.insertData(EventName, num, "Never", USERNAME);
+                db.insertData(EventName, num, "Never", username);
                 Toast EventAddedToast = Toast.makeText(getApplicationContext(), "Event added successfully", Toast.LENGTH_SHORT);
                 EventAddedToast.show();
                 Date date = Cal.getTime(); //get time from user selected date for notification time
@@ -136,23 +140,23 @@ public class EventAddActivity extends AppCompatActivity {
                 findRowId.close(); //Closes cursor
             }
         });
-        UpdateData();
-
-    }
-
-
-    public void UpdateData() {
         UpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //EventAddActivity e = new EventAddActivity();
                 //boolean updateTable = db.updateTable(eventName.toString(), num, repeatOptionText.toString());
                 Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                intent.putExtra(MainActivity.USERNAME, USERNAME);
+                intent.putExtra(MainActivity.USERNAME, username);
                 startActivity(intent);
             }
         });
+
     }
+
+
+    /*public void UpdateData() {
+
+    }*/
     public void OpenDialog_() {
         OpenDialog op = new OpenDialog();
         op.show(getSupportFragmentManager(), "Example");

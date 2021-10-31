@@ -35,10 +35,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = new EventDatabase(this);
+
+        Intent extraIntent = getIntent();
+
+        String username = extraIntent.getStringExtra(USERNAME);
         SQLiteDatabase dbs = db.getWritableDatabase();
 
 
-        Cursor resultSet = dbs.rawQuery("Select * from events where username = ?", new String[]{USERNAME});//select everything from events
+        Cursor resultSet = dbs.rawQuery("Select * from events where username = ?", new String[]{username});
         events = findViewById(R.id.events);
         eventAdapter = new EventAdapter(this, resultSet); //creates adapter and sets it to the ListView
         events.setAdapter(eventAdapter);

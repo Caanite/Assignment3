@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class EventDatabase  extends SQLiteOpenHelper {
 
-    public static final String DBName = "Login.db";
+    public static final String DBName = "Database.db";
 
     public EventDatabase(Context context) {
         super(context, "Database.db", null,1 );
