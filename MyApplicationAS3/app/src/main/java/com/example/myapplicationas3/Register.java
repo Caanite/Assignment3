@@ -1,3 +1,5 @@
+//Programmed by Sam Spark (18040422) and Sarbjot Singh (17190067)
+
 package com.example.myapplicationas3;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +47,7 @@ public class Register extends AppCompatActivity {
                                 Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class); //WHEREEVER MAIN PAGE IS MEANT TO BE
                             }else{
-                                Toast.makeText(Register.this, "Registered unsuccessful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this, "Registration unsuccessful", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else{

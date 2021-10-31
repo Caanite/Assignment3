@@ -1,12 +1,20 @@
+//Programmed by Sam Spark (18040422) and Sarbjot Singh (17190067)
 package com.example.myapplicationas3;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
@@ -38,9 +47,11 @@ public class EventAddActivity extends AppCompatActivity {
     private Button repeatButton;
     private TextView repeatOptionText;
     private Button addEvent;
+    private Button UpdateButton;
     private Calendar Cal = Calendar.getInstance();
     private int yr = Cal.get(Calendar.YEAR), mon = Cal.get(Calendar.MONTH), day = Cal.get(Calendar.DAY_OF_MONTH);
     private boolean granted = false;
+    private int repeatId = 0;
     EventDatabase db = new EventDatabase(this);
 
     private String[] arrayTimeTexts;
@@ -53,8 +64,10 @@ public class EventAddActivity extends AppCompatActivity {
         EditText ed = (EditText) findViewById(R.id.editTextDate2);
         eventName = (EditText) findViewById(R.id.eventName);
         addEvent = (Button) findViewById(R.id.addEvent);
+        UpdateButton = (Button) findViewById(R.id.UpdateButton);
 
         repeatButton = (Button) findViewById(R.id.repeatButton);
+        SQLiteDatabase dbs = db.getWritableDatabase();
         repeatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,19 +127,38 @@ public class EventAddActivity extends AppCompatActivity {
                 db.insertData(EventName, num, "Never");
                 Toast EventAddedToast = Toast.makeText(getApplicationContext(), "Event added successfully", Toast.LENGTH_SHORT);
                 EventAddedToast.show();
+                Date date = Cal.getTime(); //get time from user selected date for notification time
+                Cursor findRowId = dbs.rawQuery("Select * from events", null); //Selects the rows to find the event id
+                findRowId.moveToLast(); //moves to last added event
+                scheduleNotification(getNotification(EventName), date.getTime(), findRowId.getPosition(), repeatId); //schedules the notification
+                findRowId.close(); //Closes cursor
+            }
+        });
+        UpdateData();
 
+    }
+
+
+    public void UpdateData() {
+        UpdateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //EventAddActivity e = new EventAddActivity();
+                //boolean updateTable = db.updateTable(eventName.toString(), num, repeatOptionText.toString());
+                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }
-
     public void OpenDialog_() {
         OpenDialog op = new OpenDialog();
         op.show(getSupportFragmentManager(), "Example");
     }
 
-    public void setRepeatText(String repeatText) {
+    public void setRepeatText(int id, String repeatText) {
         repeatOptionText = findViewById(R.id.repeatOptionText);
-        repeatOptionText.setText(repeatText);
+        repeatOptionText.setText(repeatText); //Changes repeat text to user-selected options
+        repeatId = id; //sets the repeatId for the Notification scheduling code to recognise it
     }
 
     @Override
@@ -136,6 +168,42 @@ public class EventAddActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR}, _Request);
         }
 
+    }
+
+    private void scheduleNotification (Notification notification, long timeDue, int id, int repeatId)
+    {
+        Intent notificationIntent = new Intent(this, DateNotificationBroadcast.class);//Intent to send it to DataNotificationBroadcast class
+        notificationIntent.putExtra(DateNotificationBroadcast.NOTIFICATION_ID, id); //sends the id to the Notification
+        notificationIntent.putExtra(DateNotificationBroadcast.NOTIFICATION, notification); //sends the notification to the Notification
+        PendingIntent pendingBroadcast = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT); //sets up the intent to be sent in the future
+        AlarmManager notificationTimer = (AlarmManager)getSystemService(Context.ALARM_SERVICE); //Set up AlarmManager for the timing of notification
+        assert notificationTimer != null; //ensure it exists
+        switch(repeatId) //repeats based on the repeatId user selected
+        {
+            case 1: notificationTimer.setRepeating(AlarmManager.ELAPSED_REALTIME, timeDue, AlarmManager.INTERVAL_DAY, pendingBroadcast);
+
+            case 2: notificationTimer.setRepeating(AlarmManager.ELAPSED_REALTIME, timeDue, AlarmManager.INTERVAL_DAY * 2, pendingBroadcast);
+
+            case 3: notificationTimer.setRepeating(AlarmManager.ELAPSED_REALTIME, timeDue, AlarmManager.INTERVAL_DAY * 7, pendingBroadcast);
+
+            case 4: notificationTimer.setRepeating(AlarmManager.ELAPSED_REALTIME, timeDue, AlarmManager.INTERVAL_DAY * 14, pendingBroadcast);
+
+            case 5: notificationTimer.setRepeating(AlarmManager.ELAPSED_REALTIME, timeDue, AlarmManager.INTERVAL_DAY * 30, pendingBroadcast);
+
+            case 6: notificationTimer.setRepeating(AlarmManager.ELAPSED_REALTIME, timeDue, AlarmManager.INTERVAL_DAY * 365, pendingBroadcast);
+
+            default: notificationTimer.set(AlarmManager.ELAPSED_REALTIME, timeDue, pendingBroadcast);
+        }
+    }
+
+    private Notification getNotification (String content)
+    {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default"); //sets up new notification
+        builder.setContentTitle("Event Today!");
+        builder.setContentText(content); //adds content
+        builder.setAutoCancel(true); //ensures user can cancel it
+        builder.setChannelId("10001"); //sets the channel ID to the default one
+        return builder.build(); //builds notification
     }
 
 }

@@ -1,3 +1,5 @@
+//Programmed  by Sam Spark (18040422) and Sarbjot Singh (17190067)
+
 package com.example.myapplicationas3;
 
 import android.content.ContentValues;
@@ -61,6 +63,15 @@ public class EventDatabase  extends SQLiteOpenHelper {
         }
 
     }*/
+   public boolean updateTable(String eventName, String eventDate, String repeat){
+       SQLiteDatabase db = this.getWritableDatabase();
+       ContentValues contentValues = new ContentValues();
+       contentValues.put("eventName", eventName);
+       contentValues.put("eventDate", eventDate); //might need to see if this works
+       contentValues.put("repeat", repeat);
+       db.update("events", contentValues, "eventName = ?", new String[]{eventName});
+       return true;
+   }
 
 }
 

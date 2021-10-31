@@ -1,3 +1,5 @@
+//Programmed by Sam Spark (18040422) and Sarbjot Singh (17190067)
+
 package com.example.myapplicationas3;
 
 import android.app.Dialog;
@@ -15,20 +17,20 @@ public class OpenDialog extends AppCompatDialogFragment {
 
 
     public Dialog onCreateDialog(Bundle SavedInstanceState) {
-        EventAddActivity activity = (EventAddActivity)getActivity();
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        EventAddActivity activity = (EventAddActivity)getActivity(); //gets the activity to interact with functions
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity); //builds the dialog
 
-        Resources res = getResources();
+        Resources res = getResources(); //gets system resources to
 
-        arrayTimeTexts = res.getStringArray(R.array.Time_array);
+        arrayTimeTexts = res.getStringArray(R.array.Time_array); //get the time array from the resources
 
         builder.setTitle(R.string.repeat).setItems(arrayTimeTexts, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                activity.setRepeatText(arrayTimeTexts[which]);
+                activity.setRepeatText(which, arrayTimeTexts[which]); //sets the options based on repeat options selected
             }
         });
 
-        return builder.create();
+        return builder.create(); //Creates dialog
     }
 }

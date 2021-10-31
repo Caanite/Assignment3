@@ -1,3 +1,4 @@
+//Programmed by Sam Spark (18040422) and Sarbjot Singh (17190067)
 package com.example.myapplicationas3;
 
 import android.content.ContentValues;
@@ -30,6 +31,7 @@ public class DataBaseCode  extends SQLiteOpenHelper {
     public Boolean insertData(String username, String password) { //Inputting data from user into db
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         contentValues.put("username", username);
         contentValues.put("password", password);
         long result = db.insert("users", null, contentValues);
