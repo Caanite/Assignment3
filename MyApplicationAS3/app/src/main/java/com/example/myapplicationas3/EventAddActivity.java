@@ -2,11 +2,17 @@ package com.example.myapplicationas3;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
@@ -57,6 +64,7 @@ public class EventAddActivity extends AppCompatActivity {
         UpdateButton = (Button) findViewById(R.id.UpdateButton);
 
         repeatButton = (Button) findViewById(R.id.repeatButton);
+        SQLiteDatabase dbs = db.getWritableDatabase();
         repeatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +124,10 @@ public class EventAddActivity extends AppCompatActivity {
                 db.insertData(EventName, num, "Never");
                 Toast EventAddedToast = Toast.makeText(getApplicationContext(), "Event added successfully", Toast.LENGTH_SHORT);
                 EventAddedToast.show();
-
+                Date date = Cal.getTime();
+                Cursor findRowId = dbs.rawQuery("Select * from events", null);
+                findRowId.moveToLast();
+                scheduleNotification(getNotification(EventName), date.getTime(), findRowId.getPosition());
             }
         });
         UpdateData();
@@ -152,6 +163,27 @@ public class EventAddActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR}, _Request);
         }
 
+    }
+
+    private void scheduleNotification (Notification notification, long delay, int id)
+    {
+        Intent notificationIntent = new Intent(this, DateNotificationBroadcast.class);
+        notificationIntent.putExtra(DateNotificationBroadcast.NOTIFICATION_ID, id);
+        notificationIntent.putExtra(DateNotificationBroadcast.NOTIFICATION, notification);
+        PendingIntent pendingBroadcast = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager notificationTimer = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        assert notificationTimer != null;
+        notificationTimer.set(AlarmManager.ELAPSED_REALTIME, delay, pendingBroadcast);
+    }
+
+    private Notification getNotification (String content)
+    {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default");
+        builder.setContentTitle("Event Today!");
+        builder.setContentText(content);
+        builder.setAutoCancel(false);
+        builder.setChannelId("10001");
+        return builder.build();
     }
 
 }
