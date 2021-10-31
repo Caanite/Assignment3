@@ -55,7 +55,7 @@ public class EventDatabase  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from events where eventName = ?", new String[]{eventName});
         if (cursor.getCount()>0) {
-            long result = db.delete("events", "name=?", new String[]{eventName});
+            long result = db.delete("events", "eventName=?", new String[]{eventName});
             if (result == -1) {
                 return false;
             }else{

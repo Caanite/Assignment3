@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout-land/activity_add.xml" value="0.19047619047619047" />
+        <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout-land/activity_login_page.xml" value="0.19047619047619047" />
+        <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout-land/activity_main.xml" value="0.19047619047619047" />
+        <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout-land/activity_signingin_layout.xml" value="0.19047619047619047" />
+        <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout-land/events.xml" value="0.19047619047619047" />
         <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout/activity_add.xml" value="0.25" />
         <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout/activity_login_page.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout/activity_login_page2.xml" value="0.20885416666666667" />
@@ -10,9 +15,7 @@
         <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout/activity_signingin_layout.xml" value="0.2" />
         <entry key="..\:/Users/Sarbjot Singh/Documents/GitHub/Assignment3/MyApplicationAS3/app/src/main/res/layout/events.xml" value="0.21875" />
         <entry key="..\:/Users/theca/Documents/Android Studio Example Projects/MyApplicationAS3/app/src/main/res/layout/activity_add.xml" value="0.2554347826086957" />
-        <entry key="..\:/Users/theca/Documents/Android Studio Example Projects/MyApplicationAS3/app/src/main/res/layout/activity_login_page.xml" value="0.20923913043478262" />
         <entry key="..\:/Users/theca/Documents/Android Studio Example Projects/MyApplicationAS3/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
-        <entry key="..\:/Users/theca/Documents/Android Studio Example Projects/MyApplicationAS3/app/src/main/res/layout/activity_signingin_layout.xml" value="0.20923913043478262" />
         <entry key="..\:/Users/theca/Documents/Android Studio Example Projects/MyApplicationAS3/app/src/main/res/layout/events.xml" value="0.20520833333333333" />
       </map>
     </option>

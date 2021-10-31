@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     DataDeleted = db.deleteFromTable(checkInput);
                     if (DataDeleted){
                         Toast.makeText(getApplicationContext(), "Event deleted successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(getIntent());
                     }else{
                         Toast.makeText(getApplicationContext(), "Event does not exist", Toast.LENGTH_SHORT).show();
                     }
