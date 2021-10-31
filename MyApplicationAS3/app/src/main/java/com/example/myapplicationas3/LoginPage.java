@@ -35,23 +35,24 @@ public class LoginPage extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
-                if (user.equals("") || pass.equals("")){
+                if (user.equals("") || pass.equals("")){ //no input from user condition
                     Toast.makeText(LoginPage.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
 
-                }else{
+                }else{ //successful sign in
                     Boolean checkuserPass = db.checkUserNamePassword(user,pass);
                     if (checkuserPass){
                         Toast.makeText(LoginPage.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                        intent.putExtra(MainActivity.USERNAME, user); //send username to main
                         startActivity(intent);
-                    }else{
+                    }else{ //unsuccessful
                         Toast.makeText(LoginPage.this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();
                     }
                 }
 
             }
         });
-        Register.setOnClickListener(new View.OnClickListener() {
+        Register.setOnClickListener(new View.OnClickListener() { //if user isn't a member, redirects to register activity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Register.class);

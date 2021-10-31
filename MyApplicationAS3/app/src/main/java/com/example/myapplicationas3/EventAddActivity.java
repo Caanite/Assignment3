@@ -42,6 +42,8 @@ import java.text.SimpleDateFormat;
 
 public class EventAddActivity extends AppCompatActivity {
 
+    public static String USERNAME;
+
     private static final int _Request = 1;
     private EditText eventName;
     private Button repeatButton;
@@ -61,6 +63,9 @@ public class EventAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        Intent extraIntent = getIntent();
+
+        String username = extraIntent.getStringExtra(USERNAME); //receive username from main
         EditText ed = (EditText) findViewById(R.id.editTextDate2);
         eventName = (EditText) findViewById(R.id.eventName);
         addEvent = (Button) findViewById(R.id.addEvent);
@@ -77,23 +82,23 @@ public class EventAddActivity extends AppCompatActivity {
 
         DatePickerDialog.OnDateSetListener dt = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)  {
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)  { //Get individual sections of date
                 Cal.set(Calendar.YEAR, year);
                 Cal.set(Calendar.MONTH, month);
                 Cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 Date current = new Date();
-                num = Integer.toString(dayOfMonth) +"/" + Integer.toString(month+1) +"/" +Integer.toString(year);
+                num = Integer.toString(dayOfMonth) +"/" + Integer.toString(month+1) +"/" +Integer.toString(year); //format wasn't helpful if not including /
                 Date ED = null;
                 try{
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    ED = sdf.parse(num);
+                    ED = sdf.parse(num); //
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if (ED.after(current) || ED.equals(current)) {
+                if (ED.after(current) || ED.equals(current)) { //Overall current and later date get compared
                     InputLabel();
-                }else if (year == yr && month ==mon && day == dayOfMonth ) { //Top condition takes into account hours and minutes
+                }else if (year == yr && month ==mon && day == dayOfMonth ) { //Top condition takes into account hours and minutes, this one is for "on the day events"
                     InputLabel();
                 }else{
                     Toast WrongDateToast = Toast.makeText(getApplicationContext(), "Please make events for the future, not the past", Toast.LENGTH_SHORT);
@@ -115,7 +120,7 @@ public class EventAddActivity extends AppCompatActivity {
 
         ed.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //Show user date input
                 new DatePickerDialog(EventAddActivity.this, dt, Cal.get(Calendar.YEAR), Cal.get(Calendar.MONTH), Cal.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -124,7 +129,7 @@ public class EventAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String EventName = eventName.getText().toString();
-                db.insertData(EventName, num, "Never");
+                db.insertData(EventName, num, "Never", username);
                 Toast EventAddedToast = Toast.makeText(getApplicationContext(), "Event added successfully", Toast.LENGTH_SHORT);
                 EventAddedToast.show();
                 Date date = Cal.getTime(); //get time from user selected date for notification time
@@ -134,22 +139,23 @@ public class EventAddActivity extends AppCompatActivity {
                 findRowId.close(); //Closes cursor
             }
         });
-        UpdateData();
-
-    }
-
-
-    public void UpdateData() {
-        UpdateButton.setOnClickListener(new View.OnClickListener() {
+        UpdateButton.setOnClickListener(new View.OnClickListener() { //Called update, but returns user to main activity
             @Override
             public void onClick(View v) {
                 //EventAddActivity e = new EventAddActivity();
                 //boolean updateTable = db.updateTable(eventName.toString(), num, repeatOptionText.toString());
                 Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                intent.putExtra(MainActivity.USERNAME, username); //send username to main
                 startActivity(intent);
             }
         });
+
     }
+
+
+    /*public void UpdateData() {
+
+    }*/
     public void OpenDialog_() {
         OpenDialog op = new OpenDialog();
         op.show(getSupportFragmentManager(), "Example");

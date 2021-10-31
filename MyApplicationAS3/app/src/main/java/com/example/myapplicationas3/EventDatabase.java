@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class EventDatabase  extends SQLiteOpenHelper {
 
-    public static final String DBName = "Login.db";
+    public static final String DBName = "Database.db";
 
     public EventDatabase(Context context) {
         super(context, "Database.db", null,1 );
@@ -22,7 +22,7 @@ public class EventDatabase  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table events(id INTEGER PRIMARY KEY AUTOINCREMENT, eventName TEXT, eventDate TEXT, repeat TEXT)");
+        db.execSQL("create Table events(eventName TEXT PRIMARY KEY, eventDate TEXT, repeat TEXT, username TEXT)");
     }
 
     @Override
@@ -31,12 +31,13 @@ public class EventDatabase  extends SQLiteOpenHelper {
 
     }
 
-    public Boolean insertData(String eventName, String eventDate, String repeat) { //Inputting data from user into db
+    public Boolean insertData(String eventName, String eventDate, String repeat, String username) { //Inputting data from user into db
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("eventName", eventName);
         contentValues.put("eventDate", eventDate); //might need to see if this works
         contentValues.put("repeat", repeat);
+        contentValues.put("username", username);
         long result = db.insert("events", null, contentValues);
         if (result == -1) {
             return false;
@@ -68,12 +69,13 @@ public class EventDatabase  extends SQLiteOpenHelper {
         }
    }
   
-   public boolean updateTable(String eventName, String eventDate, String repeat){
+   public boolean updateTable(String eventName, String eventDate, String repeat, String username){
        SQLiteDatabase db = this.getWritableDatabase();
        ContentValues contentValues = new ContentValues();
        contentValues.put("eventName", eventName);
        contentValues.put("eventDate", eventDate); //might need to see if this works
        contentValues.put("repeat", repeat);
+       contentValues.put("username", username);
        db.update("events", contentValues, "eventName = ?", new String[]{eventName});
        return true;
    }

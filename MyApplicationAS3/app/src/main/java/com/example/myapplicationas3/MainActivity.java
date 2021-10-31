@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String USERNAME;
+
     private Button EntryAdder;
     //SQLiteDatabase db = SQLiteDatabase.openDatabase("Database.db", null, SQLiteDatabase.OPEN_READONLY); caused errors
     EventDatabase db;
@@ -33,10 +35,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = new EventDatabase(this);
+
+        Intent extraIntent = getIntent();
+
+        String username = extraIntent.getStringExtra(USERNAME); //receive username from login/registration
         SQLiteDatabase dbs = db.getWritableDatabase();
 
 
-        Cursor resultSet = dbs.rawQuery("Select * from events", null);//select everything from events
+        Cursor resultSet = dbs.rawQuery("Select * from events where username = ?", new String[]{username}); //select based on username
         events = findViewById(R.id.events);
         eventAdapter = new EventAdapter(this, resultSet); //creates adapter and sets it to the ListView
         events.setAdapter(eventAdapter);
@@ -47,25 +53,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EventAddActivity.class); //button swaps to the event adder screen
+                intent.putExtra(EventAddActivity.USERNAME, username); //send username to add
                 startActivity(intent);
-
             }
         });
 
         DeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean DataDeleted = false;
+                Boolean DataDeleted = false; //to see if data was deleted
                 String checkInput = DeleteEditText.getText().toString();
-                if (checkInput.equals("")) {
+                if (checkInput.equals("")) { //no input from user
                     Toast.makeText(getApplicationContext(), "Please enter the name of event you want deleted", Toast.LENGTH_SHORT).show();
                 } else {
-                    DataDeleted = db.deleteFromTable(checkInput);
-                    if (DataDeleted){
+                    DataDeleted = db.deleteFromTable(checkInput); //see if item existed to be deleted
+                    if (DataDeleted){ //sucessful deletion
                         Toast.makeText(getApplicationContext(), "Event deleted successfully", Toast.LENGTH_SHORT).show();
-                        finish();
+                        finish(); //refreshing the page
                         startActivity(getIntent());
-                    }else{
+                    }else{ //unsucessful deletion
                         Toast.makeText(getApplicationContext(), "Event does not exist", Toast.LENGTH_SHORT).show();
                     }
                 }

@@ -36,16 +36,18 @@ public class Register extends AppCompatActivity {
                 String pass = Password.getText().toString();
                 String ReEnter = ReEnterPassword.getText().toString();
 
-                if (user.equals("") || pass.equals("")||ReEnter.equals("")){
+                if (user.equals("") || pass.equals("")||ReEnter.equals("")){ //no input
                     Toast.makeText(Register.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 }else{
-                    if (pass.equals(ReEnter)){
+                    if (pass.equals(ReEnter)){ //password and other checkers
                         Boolean checkUser = db.checkUsername(user);
                         if (!checkUser){
                             Boolean insert = db.insertData(user, pass);
                             if (insert){
                                 Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class); //WHEREEVER MAIN PAGE IS MEANT TO BE
+                                intent.putExtra(MainActivity.USERNAME, user); //send username to main
+                                startActivity(intent);
                             }else{
                                 Toast.makeText(Register.this, "Registration unsuccessful", Toast.LENGTH_SHORT).show();
                             }
@@ -72,7 +74,7 @@ public class Register extends AppCompatActivity {
         });
     }
     public void OpenActivity(){
-        Intent intent = new Intent(this,LoginPage.class);
+        Intent intent = new Intent(this,LoginPage.class); //go ahead into main activity
         startActivity(intent);
     }
 }
