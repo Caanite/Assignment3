@@ -61,17 +61,17 @@ public class MainActivity extends AppCompatActivity {
         DeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean DataDeleted = false;
+                Boolean DataDeleted = false; //to see if data was deleted
                 String checkInput = DeleteEditText.getText().toString();
-                if (checkInput.equals("")) {
+                if (checkInput.equals("")) { //no input from user
                     Toast.makeText(getApplicationContext(), "Please enter the name of event you want deleted", Toast.LENGTH_SHORT).show();
                 } else {
-                    DataDeleted = db.deleteFromTable(checkInput);
-                    if (DataDeleted){
+                    DataDeleted = db.deleteFromTable(checkInput); //see if item existed to be deleted
+                    if (DataDeleted){ //sucessful deletion
                         Toast.makeText(getApplicationContext(), "Event deleted successfully", Toast.LENGTH_SHORT).show();
-                        finish();
+                        finish(); //refreshing the page
                         startActivity(getIntent());
-                    }else{
+                    }else{ //unsucessful deletion
                         Toast.makeText(getApplicationContext(), "Event does not exist", Toast.LENGTH_SHORT).show();
                     }
                 }

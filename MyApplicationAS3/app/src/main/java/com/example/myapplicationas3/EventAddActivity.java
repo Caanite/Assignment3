@@ -82,23 +82,23 @@ public class EventAddActivity extends AppCompatActivity {
 
         DatePickerDialog.OnDateSetListener dt = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)  {
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)  { //Get individual sections of date
                 Cal.set(Calendar.YEAR, year);
                 Cal.set(Calendar.MONTH, month);
                 Cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 Date current = new Date();
-                num = Integer.toString(dayOfMonth) +"/" + Integer.toString(month+1) +"/" +Integer.toString(year);
+                num = Integer.toString(dayOfMonth) +"/" + Integer.toString(month+1) +"/" +Integer.toString(year); //format wasn't helpful if not including /
                 Date ED = null;
                 try{
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    ED = sdf.parse(num);
+                    ED = sdf.parse(num); //
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if (ED.after(current) || ED.equals(current)) {
+                if (ED.after(current) || ED.equals(current)) { //Overall current and later date get compared
                     InputLabel();
-                }else if (year == yr && month ==mon && day == dayOfMonth ) { //Top condition takes into account hours and minutes
+                }else if (year == yr && month ==mon && day == dayOfMonth ) { //Top condition takes into account hours and minutes, this one is for "on the day events"
                     InputLabel();
                 }else{
                     Toast WrongDateToast = Toast.makeText(getApplicationContext(), "Please make events for the future, not the past", Toast.LENGTH_SHORT);
@@ -120,7 +120,7 @@ public class EventAddActivity extends AppCompatActivity {
 
         ed.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //Show user date input
                 new DatePickerDialog(EventAddActivity.this, dt, Cal.get(Calendar.YEAR), Cal.get(Calendar.MONTH), Cal.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -139,7 +139,7 @@ public class EventAddActivity extends AppCompatActivity {
                 findRowId.close(); //Closes cursor
             }
         });
-        UpdateButton.setOnClickListener(new View.OnClickListener() {
+        UpdateButton.setOnClickListener(new View.OnClickListener() { //Called update, but returns user to main activity
             @Override
             public void onClick(View v) {
                 //EventAddActivity e = new EventAddActivity();

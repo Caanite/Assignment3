@@ -50,7 +50,7 @@ public class DataBaseCode  extends SQLiteOpenHelper {
             return false;
         }
     }
-    public Boolean checkUserNamePassword(String username, String Password) {
+    public Boolean checkUserNamePassword(String username, String Password) { //Needed for re-enter password
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, Password} );
         if (cursor.getCount()> 0) {
