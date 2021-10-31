@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="46dp"
-                android:hint="Renter Password:"
+                android:hint="Re-enter Password:"
                 android:minHeight="48dp" />
 
             <Button
