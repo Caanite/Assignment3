@@ -46,6 +46,8 @@ public class Register extends AppCompatActivity {
                             if (insert){
                                 Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class); //WHEREEVER MAIN PAGE IS MEANT TO BE
+                                intent.putExtra(MainActivity.USERNAME, user);
+                                startActivity(intent);
                             }else{
                                 Toast.makeText(Register.this, "Registration unsuccessful", Toast.LENGTH_SHORT).show();
                             }

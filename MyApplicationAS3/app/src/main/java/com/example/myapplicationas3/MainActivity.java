@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String USERNAME;
+
     private Button EntryAdder;
     //SQLiteDatabase db = SQLiteDatabase.openDatabase("Database.db", null, SQLiteDatabase.OPEN_READONLY); caused errors
     EventDatabase db;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase dbs = db.getWritableDatabase();
 
 
-        Cursor resultSet = dbs.rawQuery("Select * from events", null);//select everything from events
+        Cursor resultSet = dbs.rawQuery("Select * from events where username = ?", new String[]{USERNAME});//select everything from events
         events = findViewById(R.id.events);
         eventAdapter = new EventAdapter(this, resultSet); //creates adapter and sets it to the ListView
         events.setAdapter(eventAdapter);
@@ -47,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EventAddActivity.class); //button swaps to the event adder screen
+                intent.putExtra(EventAddActivity.USERNAME, USERNAME);
                 startActivity(intent);
-
             }
         });
 

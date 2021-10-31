@@ -42,6 +42,8 @@ import java.text.SimpleDateFormat;
 
 public class EventAddActivity extends AppCompatActivity {
 
+    public static String USERNAME;
+
     private static final int _Request = 1;
     private EditText eventName;
     private Button repeatButton;
@@ -124,7 +126,7 @@ public class EventAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String EventName = eventName.getText().toString();
-                db.insertData(EventName, num, "Never");
+                db.insertData(EventName, num, "Never", USERNAME);
                 Toast EventAddedToast = Toast.makeText(getApplicationContext(), "Event added successfully", Toast.LENGTH_SHORT);
                 EventAddedToast.show();
                 Date date = Cal.getTime(); //get time from user selected date for notification time
@@ -146,6 +148,7 @@ public class EventAddActivity extends AppCompatActivity {
                 //EventAddActivity e = new EventAddActivity();
                 //boolean updateTable = db.updateTable(eventName.toString(), num, repeatOptionText.toString());
                 Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                intent.putExtra(MainActivity.USERNAME, USERNAME);
                 startActivity(intent);
             }
         });
