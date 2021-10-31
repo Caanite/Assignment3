@@ -1,3 +1,4 @@
+//Programmed by Sam Spark (18040422) and Sarbjot Singh (17190067)
 package com.example.myapplicationas3;
 
 import android.app.Notification;
@@ -13,8 +14,8 @@ public class DateNotificationBroadcast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent)
     {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = intent.getParcelableExtra(NOTIFICATION);
-        int id = intent.getIntExtra(NOTIFICATION_ID, 0);
-        notificationManager.notify(id, notification);
+        Notification notification = intent.getParcelableExtra(NOTIFICATION);    //NOTIFICATION and NOTIFICATION is sent as extra from
+        int id = intent.getIntExtra(NOTIFICATION_ID, 0);            //notification function
+        notificationManager.notify(id, notification);                   //Create Notification
     }
 }

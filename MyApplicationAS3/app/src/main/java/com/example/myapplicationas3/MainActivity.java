@@ -1,3 +1,5 @@
+//Programmed by Sam Spark (18040422) and Sarbjot Singh (17190067)
+
 package com.example.myapplicationas3;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +22,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private Button EntryAdder;
-    //SQLiteDatabase db = SQLiteDatabase.openDatabase("Database.db", null, SQLiteDatabase.OPEN_READONLY);
+    //SQLiteDatabase db = SQLiteDatabase.openDatabase("Database.db", null, SQLiteDatabase.OPEN_READONLY); caused errors
     EventDatabase db;
     EventAdapter eventAdapter;
     ListView events;
@@ -34,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase dbs = db.getWritableDatabase();
 
 
-        Cursor resultSet = dbs.rawQuery("Select * from events", null);
+        Cursor resultSet = dbs.rawQuery("Select * from events", null);//select everything from events
         events = findViewById(R.id.events);
-        eventAdapter = new EventAdapter(this, resultSet);
+        eventAdapter = new EventAdapter(this, resultSet); //creates adapter and sets it to the ListView
         events.setAdapter(eventAdapter);
         DeleteEditText = (EditText) findViewById(R.id.DeleteEditText);
         DeleteButton = (Button) findViewById(R.id.DeleteButton);
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         EntryAdder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EventAddActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EventAddActivity.class); //button swaps to the event adder screen
                 startActivity(intent);
 
             }

@@ -1,3 +1,4 @@
+//Programmed by Sam Spark (18040422) and Sarbjot Singh (17190067)
 package com.example.myapplicationas3;
 
 import android.content.Context;
@@ -15,11 +16,11 @@ public class EventAdapter extends BaseAdapter {
     Cursor results;
     LayoutInflater inflater;
 
-    class ViewHolder
+    /*class ViewHolder
     {
         TextView eventName;
         TextView eventDate;
-    }
+    }   relic of a bygone age*/
 
     public EventAdapter(Context applicationContext, Cursor results)
     {
@@ -49,7 +50,7 @@ public class EventAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
-        ViewHolder viewHolder;
+        //ViewHolder viewHolder; relic of ancient past
         if(view == null)
         {
             view = inflater.inflate(R.layout.events, viewGroup, false);
